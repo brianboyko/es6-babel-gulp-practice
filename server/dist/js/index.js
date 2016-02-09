@@ -10,8 +10,6 @@ var es6Test = function es6Test() {
   return "yes";
 };
 
-console.log(es6Test());
-
 function getQuote() {
   var quote;
 
@@ -70,7 +68,7 @@ var swanson = function () {
   };
 }();
 
-console.log('Ron once said,');
+// test
 
 module.exports = {
   es6Test: es6Test,

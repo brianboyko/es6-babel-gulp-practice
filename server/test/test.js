@@ -13,7 +13,7 @@ var assert = require('assert');
 //   });
 // });
 
-var mainFile = require('../public/index.js');
+var mainFile = require('../dist/js/index.min.js');
 var es6Test = mainFile.es6Test;
 var swanson = mainFile.swanson;
 

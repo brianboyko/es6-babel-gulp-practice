@@ -4,8 +4,6 @@ var request = require('request');
 
 const es6Test = () => "yes";
 
-console.log(es6Test()); 
-
 function getQuote() {
   var quote;
  
@@ -28,9 +26,11 @@ var swanson = async function() {
   console.log(quotes);
   return quotes;
 }
- 
+
+// test
+
 
 module.exports = {
-  es6Test: es6Test,
-  swanson: swanson
+  es6Test, 
+  swanson
 }
