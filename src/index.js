@@ -30,9 +30,6 @@ var swanson = async function() {
 }
  
 
-console.log('Ron once said,');
-
-
 module.exports = {
   es6Test: es6Test,
   swanson: swanson
