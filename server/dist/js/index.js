@@ -10,7 +10,7 @@ var es6Test = function es6Test() {
   return "yes";
 };
 
-function getQuote() {
+var getSwanson = function getSwanson() {
   var quote;
 
   return new Promise(function (resolve, reject) {
@@ -20,42 +20,25 @@ function getQuote() {
       resolve(quote);
     });
   });
-}
+};
 
 var swanson = function () {
   var ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee() {
-    var quote, quotes, i;
+    var quote;
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            quotes = [];
-            i = 0;
+            _context.next = 2;
+            return getSwanson();
 
           case 2:
-            if (!(i < 3)) {
-              _context.next = 10;
-              break;
-            }
-
-            _context.next = 5;
-            return getQuote();
-
-          case 5:
             quote = _context.sent;
 
-            quotes.push(quote);
+            console.log(quote);
+            return _context.abrupt("return", quote);
 
-          case 7:
-            i++;
-            _context.next = 2;
-            break;
-
-          case 10:
-            console.log(quotes);
-            return _context.abrupt("return", quotes);
-
-          case 12:
+          case 5:
           case "end":
             return _context.stop();
         }
@@ -68,9 +51,48 @@ var swanson = function () {
   };
 }();
 
+var getJeopardy = function getJeopardy() {
+  return new Promise(function (resolve, reject) {
+    request('http://jservice.io/api/random', function (err, res, body) {
+      JSON.parse(body);
+      resolve(body);
+    });
+  });
+};
+
+var jeopardy = function () {
+  var ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee2() {
+    var question;
+    return regeneratorRuntime.wrap(function _callee2$(_context2) {
+      while (1) {
+        switch (_context2.prev = _context2.next) {
+          case 0:
+            _context2.next = 2;
+            return getJeopardy();
+
+          case 2:
+            question = _context2.sent;
+
+            console.log(question);
+            return _context2.abrupt("return", question);
+
+          case 5:
+          case "end":
+            return _context2.stop();
+        }
+      }
+    }, _callee2, this);
+  }));
+
+  return function jeopardy() {
+    return ref.apply(this, arguments);
+  };
+}();
+
 // test
 
 module.exports = {
   es6Test: es6Test,
-  swanson: swanson
+  swanson: swanson,
+  jeopardy: jeopardy
 };

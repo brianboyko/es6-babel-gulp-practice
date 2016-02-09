@@ -4,7 +4,7 @@ var request = require('request');
 
 const es6Test = () => "yes";
 
-function getQuote() {
+var getSwanson = function() {
   var quote;
  
   return new Promise(function(resolve, reject) {
@@ -17,20 +17,32 @@ function getQuote() {
 }
  
 var swanson = async function() {
-  var quote;
-  var quotes = [];
-  for (var i = 0; i < 3; i++){
-    quote = await getQuote();
-    quotes.push(quote);
-  }
-  console.log(quotes);
-  return quotes;
+  var quote = await getSwanson();
+  console.log(quote);
+  return quote;
 }
+
+var getJeopardy = function (){
+  return new Promise(function(resolve, reject){
+    request('http://jservice.io/api/random', function (err, res, body){
+      JSON.parse(body);
+      resolve(body); 
+    });
+  });
+}
+
+var jeopardy = async function(){
+  var question = await getJeopardy();
+  console.log(question)
+  return(question);
+}
+
 
 // test
 
 
 module.exports = {
   es6Test, 
-  swanson
+  swanson,
+  jeopardy
 }

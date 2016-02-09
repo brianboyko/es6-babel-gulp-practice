@@ -16,6 +16,7 @@ var assert = require('assert');
 var mainFile = require('../dist/js/index.min.js');
 var es6Test = mainFile.es6Test;
 var swanson = mainFile.swanson;
+var jeopardy = mainFile.jeopardy;
 
 describe('ES6: Const & Arrow Notation Test', function(){
   it('should return "yes" when called', function(){
@@ -24,8 +25,14 @@ describe('ES6: Const & Arrow Notation Test', function(){
 })
 
 describe('ES7: Async/Await Test', function(){
+
   it('should get a Ron Swanson Quote', function(){
     var quote = swanson();
     should.exist(quote);
+  })
+
+  it('should get a Jeopardy Question', function(){
+    var ques = jeopardy();
+    should.exist(ques);
   })
 })
