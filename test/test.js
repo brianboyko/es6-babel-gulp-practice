@@ -1,7 +1,7 @@
 // ############################
 // THIS IS WRITTEN IN ES4
 // ############################
-
+var should = require('should');
 var assert = require('assert');
 describe('Array', function() {
   describe('#indexOf()', function () {
@@ -15,9 +15,17 @@ describe('Array', function() {
 
 var mainFile = require('../public/index.js');
 var es6Test = mainFile.es6Test;
+var swanson = mainFile.swanson;
 
 describe('ES6: Const & Arrow Notation Test', function(){
   it('should return "yes" when called', function(){
     assert.equal("yes", es6Test());
+  })
+})
+
+describe('ES7: Async/Await Test', function(){
+  it('should get a Ron Swanson Quote', function(){
+    var quote = swanson();
+    should.exist(quote);
   })
 })
