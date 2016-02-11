@@ -1,6 +1,6 @@
-console.log("Hello World");
 require("babel-polyfill");
 var request = require('request');
+var bcrypt = require('bcrypt');
 
 const es6Test = () => "yes";
 
@@ -38,11 +38,32 @@ var jeopardy = async function(){
 }
 
 
-// test
+// encryption
+
+
+
+var makeHash = async function(password){
+
+  var saltAndHash = function(password){
+    var hash;
+    return new Promise(function(resolve, reject){
+      bcrypt.genSalt(10, function(err, salt) {
+        bcrypt.hash(password, salt, function(err, hash) {
+            resolve(hash);
+        });
+      });
+    })
+  }
+
+  var hash = await saltAndHash(password);
+  console.log("inside:", hash); 
+}
+
 
 
 module.exports = {
   es6Test, 
   swanson,
-  jeopardy
+  jeopardy,
+  makeHash
 }

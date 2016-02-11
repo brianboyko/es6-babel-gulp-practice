@@ -31,3 +31,6 @@ node_modules
 
 # Optional REPL history
 .node_repl_history
+
+# all authorization codes and anything we don't want to share with the world
+auth/**/*.*

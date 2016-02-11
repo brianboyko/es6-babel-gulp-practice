@@ -36,6 +36,8 @@
     "should": "^8.2.1"
   },
   "dependencies": {
+    "bcrypt": "^0.8.5",
+    "node-gyp": "^3.2.1",
     "request": "^2.69.0"
   }
 }

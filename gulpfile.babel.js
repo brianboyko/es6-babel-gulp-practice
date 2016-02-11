@@ -23,6 +23,8 @@ gulp.task("build:server:scripts", function () {
 });
 
 gulp.task('test', function () {
+  gulp.start('clean');
+  gulp.start('build:server:scripts');
     return gulp.src('server/test/test.js', {read:false})
         .pipe(mocha());
 });
@@ -54,3 +56,5 @@ gulp.task('watch', function() {
 gulp.task('default', function(){
   gulp.start('server');
 });
+
+gulp.task('build-test', gulpsync.sync(['clean', 'hello', 'build:server:scripts', 'test']));
