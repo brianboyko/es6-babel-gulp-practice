@@ -36,9 +36,6 @@ var jeopardy = async function(){
 
 
 // encryption
-
-
-
 var makeHash = function(password){
   var hash;
   return new Promise(function(resolve, reject){
@@ -49,7 +46,6 @@ var makeHash = function(password){
     });
   })
 }
-
 
 
 module.exports = {

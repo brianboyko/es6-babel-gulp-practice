@@ -1,0 +1,56 @@
+    // src 
+    // ==========================================
+
+    require("babel-polyfill");
+    var bcrypt = require('bcrypt');
+
+    var saltAndHash = function(password){
+      var hash;
+      return new Promise(function(resolve, reject){
+        bcrypt.genSalt(10, function(err, salt) {
+          bcrypt.hash(password, salt, function(err, hash) {
+              resolve(hash);
+          });
+        });
+      })
+    }
+
+    var makeHash = async function(password){
+      var hash = await saltAndHash(password);
+      console.log("inside makeHash", hash); 
+      return(hash); 
+    }
+
+    // from test suite
+    // ==========================================
+
+    describe('Bcrypt Hashing', function(){
+
+      it('should generate a hash', function(){
+        var hash = makeHash('password');
+        console.log("inside test: ", hash); 
+        should.exist(hash);
+      })
+
+    })
+
+    // output to console:
+    // ==========================================
+
+      inside test:  Promise {
+      _d: 
+       { p: [Circular],
+         c: [],
+         a: undefined,
+         s: 0,
+         d: false,
+         v: undefined,
+         h: false,
+         n: false } }
+
+      inside MakeHash $2a$10$oUVFL1geSONpzdTCoW.25uaI/LCnFqeOTqshAaAxSHV5i0ubcHfV6
+
+      // etc 
+      // ==========================================
+      // .babelrc
+        {  "presets": ["es2015", "stage-0", "react"] }

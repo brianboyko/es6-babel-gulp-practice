@@ -5,26 +5,20 @@ var concat = require("gulp-concat");
 var notify = require("gulp-notify");
 var rename = require('gulp-rename');
 var cache = require("gulp-cache");
-var uglify = require("gulp-uglify"); 
+var minify = require("gulp-minify"); 
 var gulpsync = require('gulp-sync')(gulp);
 var del = require('del');
 
 gulp.task('hello', () => console.log('Hello World!'));
 
-gulp.task("build", function () {
-  return gulp.src("server/src/js/**/*.js")
+
+gulp.task('babel', function() {
+  return gulp.src('server/src/js/**/*.js')
     .pipe(babel())
-    .pipe(concat('index.js'))
-    .pipe(gulp.dest("server/dist/js"))
-    .pipe(rename({suffix:'.min'}))
-    .pipe(uglify())
-    .pipe(gulp.dest("server/dist/js"))
-    .pipe(notify({ message: 'Scripts task complete' }));
+    .pipe(gulp.dest('server/dist/js'))
 });
 
 gulp.task('test', function () {
-  gulp.start('clean');
-  gulp.start('build');
     return gulp.src('server/test/test.js', {read:false})
         .pipe(babel())
         .pipe(mocha());
@@ -40,7 +34,7 @@ gulp.task('clean', function() {
 // });
 
 // Default task
-gulp.task('server', gulpsync.sync(['clean', 'hello', 'build', 'test', 'watch']));
+gulp.task('server', gulpsync.sync(['clean', 'hello', 'babel', 'test', 'watch']));
 
 gulp.task('watch', function() {
   // Watch .js files
@@ -58,4 +52,4 @@ gulp.task('default', function(){
   gulp.start('server');
 });
 
-gulp.task('build-test', gulpsync.sync(['clean', 'hello', 'build', 'test']));
+gulp.task('build-test', gulpsync.sync(['clean', 'hello', 'babel', 'test']));
