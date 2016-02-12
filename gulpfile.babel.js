@@ -11,7 +11,7 @@ var del = require('del');
 
 gulp.task('hello', () => console.log('Hello World!'));
 
-gulp.task("build:server:scripts", function () {
+gulp.task("build", function () {
   return gulp.src("server/src/js/**/*.js")
     .pipe(babel())
     .pipe(concat('index.js'))
@@ -24,8 +24,9 @@ gulp.task("build:server:scripts", function () {
 
 gulp.task('test', function () {
   gulp.start('clean');
-  gulp.start('build:server:scripts');
+  gulp.start('build');
     return gulp.src('server/test/test.js', {read:false})
+        .pipe(babel())
         .pipe(mocha());
 });
 
@@ -39,7 +40,7 @@ gulp.task('clean', function() {
 // });
 
 // Default task
-gulp.task('server', gulpsync.sync(['clean', 'hello', 'build:server:scripts', 'test', 'watch']));
+gulp.task('server', gulpsync.sync(['clean', 'hello', 'build', 'test', 'watch']));
 
 gulp.task('watch', function() {
   // Watch .js files
@@ -57,4 +58,4 @@ gulp.task('default', function(){
   gulp.start('server');
 });
 
-gulp.task('build-test', gulpsync.sync(['clean', 'hello', 'build:server:scripts', 'test']));
+gulp.task('build-test', gulpsync.sync(['clean', 'hello', 'build', 'test']));

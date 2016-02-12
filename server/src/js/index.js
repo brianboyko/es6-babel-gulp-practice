@@ -18,14 +18,12 @@ var getSwanson = function() {
  
 var swanson = async function() {
   var quote = await getSwanson();
-  console.log(quote);
   return quote;
 }
 
 var getJeopardy = function (){
   return new Promise(function(resolve, reject){
     request('http://jservice.io/api/random', function (err, res, body){
-      JSON.parse(body);
       resolve(body); 
     });
   });
@@ -33,7 +31,6 @@ var getJeopardy = function (){
 
 var jeopardy = async function(){
   var question = await getJeopardy();
-  console.log(question)
   return(question);
 }
 
@@ -42,21 +39,15 @@ var jeopardy = async function(){
 
 
 
-var makeHash = async function(password){
-
-  var saltAndHash = function(password){
-    var hash;
-    return new Promise(function(resolve, reject){
-      bcrypt.genSalt(10, function(err, salt) {
-        bcrypt.hash(password, salt, function(err, hash) {
-            resolve(hash);
-        });
+var makeHash = function(password){
+  var hash;
+  return new Promise(function(resolve, reject){
+    bcrypt.genSalt(10, function(err, salt) {
+      bcrypt.hash(password, salt, function(err, hash) {
+          resolve(hash);
       });
-    })
-  }
-
-  var hash = await saltAndHash(password);
-  console.log("inside:", hash); 
+    });
+  })
 }
 
 
