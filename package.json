@@ -28,17 +28,30 @@
     "gulp-mocha": "^2.2.0",
     "gulp-notify": "^2.2.0",
     "gulp-rename": "^1.2.2",
+    "gulp-rollup": "^1.7.0",
     "gulp-ruby-sass": "^2.0.6",
+    "gulp-sass": "^2.2.0",
+    "gulp-sourcemaps": "^1.6.0",
     "gulp-sync": "^0.1.4",
     "gulp-uglify": "^1.5.2",
     "jshint": "^2.9.1",
     "karma": "^0.13.19",
     "mocha": "^2.4.5",
-    "should": "^8.2.1"
+    "should": "^8.2.1",
+    "webpack-stream": "^3.1.0"
   },
   "dependencies": {
     "bcrypt": "^0.8.5",
+    "body-parser": "^1.15.0",
+    "browserify": "^13.0.0",
+    "express": "^4.13.4",
+    "express-session": "^1.13.0",
+    "gulp-util": "^3.0.7",
+    "jquery": "^2.2.0",
+    "materialize-css": "^0.97.5",
     "node-gyp": "^3.2.1",
-    "request": "^2.69.0"
+    "passport": "^0.3.2",
+    "request": "^2.69.0",
+    "vinyl-source-stream": "^1.1.0"
   }
 }

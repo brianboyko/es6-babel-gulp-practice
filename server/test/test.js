@@ -2,8 +2,7 @@ require("babel-polyfill");
 
 var should = require('should');
 var assert = require('assert');
-var { es6Test, swanson, jeopardy, makeHash, codeGenerator } = require('../dist/js/index.js');
-var { codeGenerator } = require ('../dist/js/util.js')
+var { es6Test, swanson, jeopardy, makeHash, codeGenerator } = require('../dist/js/util.js');
 
 describe('Babel/ES6/7 test', function(){
   it('should return "yes" when called', function(){
