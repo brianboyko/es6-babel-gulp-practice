@@ -13,16 +13,15 @@
 DROP TABLE IF EXISTS question;
     
 CREATE TABLE question (
-  id INTEGER NULL SERIAL DEFAULT NULL,
-  deck_id INTEGER NULL DEFAULT NULL,
-  author_id INTEGER NULL DEFAULT NULL,
-  type VARCHAR(255) NULL DEFAULT NULL,
-  question TEXT NULL DEFAULT NULL,
-  points INT NULL DEFAULT NULL,
-  metadata_json TEXT NULL DEFAULT NULL,
-  correct_answer TEXT NULL DEFAULT NULL,
-  acceptable_answers_json TEXT NULL DEFAULT NULL,
-  PRIMARY KEY (id)
+  id SERIAL PRIMARY KEY NOT NULL,
+  deck_id INTEGER NULL,
+  author_id INTEGER NULL,
+  type CHAR(255) NULL,
+  question TEXT NULL,
+  points INT NULL,
+  metadata_json TEXT NULL,
+  correct_answer TEXT NULL,
+  acceptable_answers_json TEXT NULL
 );
 
 -- ---
@@ -33,15 +32,14 @@ CREATE TABLE question (
 DROP TABLE IF EXISTS decks;
     
 CREATE TABLE decks (
-  id INTEGER NULL SERIAL DEFAULT NULL,
-  owner_id INTEGER NULL DEFAULT NULL,
-  creator_id INTEGER NULL DEFAULT NULL,
-  name VARCHAR(255) NULL DEFAULT NULL,
-  topic VARCHAR(255) NULL DEFAULT NULL,
-  description TEXT NULL DEFAULT NULL,
-  type VARCHAR(255) NULL DEFAULT NULL,
-  metadata_json TEXT NULL DEFAULT NULL,
-  PRIMARY KEY (id)
+  id SERIAL PRIMARY KEY NOT NULL,
+  owner_id INTEGER NULL,
+  creator_id INTEGER NULL,
+  name CHAR(255) NULL,
+  topic CHAR(255) NULL,
+  description TEXT NULL,
+  type CHAR(255) NULL,
+  metadata_json TEXT NULL
 );
 
 -- ---
@@ -52,13 +50,12 @@ CREATE TABLE decks (
 DROP TABLE IF EXISTS games;
     
 CREATE TABLE games (
-  id INTEGER NULL SERIAL DEFAULT NULL,
-  owner_id INTEGER NULL DEFAULT NULL,
-  deck_id INTEGER NULL DEFAULT NULL,
-  timestamp TIMESTAMP NULL DEFAULT NULL,
-  results_json TEXT NULL DEFAULT NULL,
-  metadata_json TEXT NULL DEFAULT NULL,
-  PRIMARY KEY (id)
+  id SERIAL PRIMARY KEY NOT NULL,
+  owner_id INTEGER NULL,
+  deck_id INTEGER NULL,
+  game_time TIMESTAMP NULL,
+  results_json TEXT NULL,
+  metadata_json TEXT NULL
 );
 
 -- ---
@@ -69,17 +66,16 @@ CREATE TABLE games (
 DROP TABLE IF EXISTS users;
     
 CREATE TABLE users (
-  id INTEGER NULL SERIAL DEFAULT NULL,
-  type VARCHAR(255) NULL DEFAULT NULL,
-  login VARCHAR(255) NULL DEFAULT NULL,
-  password_hash VARCHAR(255) NULL DEFAULT NULL,
-  first_name VARCHAR(255) NULL DEFAULT NULL,
-  last_name VARCHAR(255) NULL DEFAULT NULL,
-  email VARCHAR(255) NULL DEFAULT NULL,
-  metadata_json TEXT NULL DEFAULT NULL,
-  joined_on TIMESTAMP NULL DEFAULT NULL,
-  last_login TIMESTAMP NULL DEFAULT NULL,
-  PRIMARY KEY (id)
+  id SERIAL PRIMARY KEY NOT NULL,
+  type CHAR(255) NULL,
+  login CHAR(255) NULL,
+  password_hash CHAR(255) NULL,
+  first_name CHAR(255) NULL,
+  last_name CHAR(255) NULL,
+  email VCHAR(255) NULL,
+  metadata_json TEXT NULL,
+  joined_on TIMESTAMP NULL,
+  last_login TIMESTAMP NULL
 );
 
 -- ---
