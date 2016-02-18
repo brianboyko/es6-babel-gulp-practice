@@ -21,7 +21,7 @@ CREATE TABLE question (
   points INTEGER NULL,
   metadata_json TEXT NULL,
   correct_answer TEXT NULL,
-  acceptable_answers_json TEXT NULL,
+  acceptable_answers_json TEXT NULL
 );
 
 -- ---
@@ -55,7 +55,7 @@ CREATE TABLE games (
   deck_id INTEGER NULL,
   timestamp TIMESTAMP NULL,
   results_json TEXT NULL,
-  metadata_json TEXT NULL,
+  metadata_json TEXT NULL
 );
 
 -- ---
@@ -75,7 +75,7 @@ CREATE TABLE users (
   email CHAR(100) NULL,
   metadata_json TEXT NULL,
   joined_on TIMESTAMP NULL,
-  last_login TIMESTAMP NULL,
+  last_login TIMESTAMP NULL
 );
 
 -- ---
@@ -86,9 +86,9 @@ CREATE TABLE users (
 DROP TABLE IF EXISTS users_decks;
     
 CREATE TABLE users_decks (
-  id SERIAL PRIMARY KEY NOT NULL COMMENT 'A deck can have multiple owners, an owner can have multiple ',
+  id SERIAL PRIMARY KEY NOT NULL,
   deck_id INTEGER NULL,
-  owner_id INTEGER NULL,
+  owner_id INTEGER NULL
 );
 
 -- ---
@@ -103,7 +103,7 @@ CREATE TABLE users_games (
   users_id INTEGER NULL,
   games_id INTEGER NULL,
   responses_json TEXT NULL,
-  metadata_json TEXT NULL,
+  metadata_json TEXT NULL
 );
 
 -- ---
@@ -116,7 +116,7 @@ DROP TABLE IF EXISTS teacher_student;
 CREATE TABLE teacher_student (
   id SERIAL PRIMARY KEY NOT NULL,
   teacher_users_id INTEGER NULL,
-  student_users_id INTEGER NULL,
+  student_users_id INTEGER NULL
 );
 
 -- ---
