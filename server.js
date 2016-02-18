@@ -10,8 +10,9 @@ var bodyParser   = require('body-parser');
 var logger       = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
-var pg           = require('pg')
 var configDB     = require('./config/database.js')
+  var pg         = require('pg');
+  var knex       = require('knex');
 
 // ======================
 // CONFIGURATION
