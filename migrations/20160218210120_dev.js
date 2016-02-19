@@ -43,7 +43,7 @@ exports.up = function(knex, Promise) {
             table.integer('deck_id')
                  .references('id')
                  .inTable('decks');
-            table.string('author_id')
+            table.integer('author_id')
                  .references('id')
                  .inTable('users');
             table.text('question');
@@ -57,7 +57,7 @@ exports.up = function(knex, Promise) {
             table.integer('owner_id')
                  .references('id')
                  .inTable('users');
-            table.string('deck_id')
+            table.integer('deck_id')
                  .references('id')
                  .inTable('decks');
             table.timestamp('created_on').defaultTo(knex.fn.now());
@@ -70,7 +70,7 @@ exports.up = function(knex, Promise) {
             table.integer('owner_id')
                  .references('id')
                  .inTable('users');
-            table.string('deck_id')
+            table.integer('deck_id')
                  .references('id')
                  .inTable('decks');
         }),
@@ -80,7 +80,7 @@ exports.up = function(knex, Promise) {
             table.integer('owner_id')
                  .references('id')
                  .inTable('users');
-            table.string('game_id')
+            table.integer('game_id')
                  .references('id')
                  .inTable('games');
         }),

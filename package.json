@@ -40,5 +40,9 @@
     "request": "^2.69.0",
     "should": "^8.2.2"
   },
-  "devDependencies": {}
+  "devDependencies": {},
+
+    "scripts": {
+    "start": "nodemon server.js --ignore node_modules/"
+  }
 }

@@ -2,13 +2,11 @@
 
 module.exports = {
   development: {
-    client: 'pg',
+    client: 'postgresql',
     connection: {
-      host     : 'localhost',
       user     : 'postgres',
       password : '',
-      database : 'digiquiz',
-      charset  : 'utf8'
+      database : 'digiquiz_dev'
     }
   }
 }

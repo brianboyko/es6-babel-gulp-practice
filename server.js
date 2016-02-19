@@ -2,6 +2,7 @@ require("babel-polyfill");
 
 
 var express      = require('express');
+  var app        = express();
 var path         = require('path');
 var session      = require('express-session');
 var passport     = require('passport');
@@ -11,8 +12,6 @@ var logger       = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
 var db           = require('./config/db.js')
-var pg           = require('pg');
-var knex         = require('knex');
 
 // ======================
 // CONFIGURATION
@@ -25,7 +24,6 @@ const PORT = process.env.PORT || 8080;
 // require('./config/passport')(passport);
 
 // EXPRESS ==============
-var app = express();
 
 app.use(logger('dev'));
 app.use(cookieParser());

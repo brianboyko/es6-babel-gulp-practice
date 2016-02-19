@@ -3,7 +3,7 @@ var env = 'development';
 var knex = require('knex')(config[env]);
 
 module.exports = {
-  url: "postgres://postgres@localhost/development",
+  url: "postgres://postgres@localhost/digiquiz_dev",
   knex: knex
 }
 
