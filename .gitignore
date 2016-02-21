@@ -34,3 +34,4 @@ node_modules
 
 # all authorization codes and anything we don't want to share with the world
 config/auth/**/*.*
+config/auth.*

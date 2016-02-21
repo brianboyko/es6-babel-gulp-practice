@@ -9,7 +9,8 @@ exports.up = function(knex, Promise) {
             table.string('type');
             table.string('username');
             table.string('email');
-            table.string('local_password_hash');
+            table.string('hashpass');
+            table.string('facebook_username')
             table.string('facebook_id');
             table.string('facebook_token');
             table.string('twitter_token');
