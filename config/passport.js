@@ -2,9 +2,23 @@
 
 // load all the things we need
 var LocalStrategy   = require('passport-local').Strategy;
+var bcrypt = require('bcrypt-node'); 
 
 // load up the user model
 var User            = require('../app/models/User');
+
+// write the helper functions
+
+var hashPass = function(password){
+  return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null); 
+}
+
+var validPass = function(password, hash){
+  return bcrypt.compareSync(password, hash)
+}
+
+
+
 
 // expose this function to our app using module.exports
 module.exports = function(passport) {
@@ -47,7 +61,7 @@ module.exports = function(passport) {
 
         // find a user whose email is the same as the forms email
         // we are checking to see if the user trying to login already exists
-        User.findOne({ 'local.email' :  email }, function(err, user) {
+        User.findOne({ 'email' :  email }, function(err, user) {
             // if there are any errors, return the error
             if (err)
                 return done(err);
@@ -57,13 +71,8 @@ module.exports = function(passport) {
                 return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
             } else {
 
-                // if there is no user with that email
-                // create the user
-                var newUser            = new User();
 
-                // set the user's local credentials
-                newUser.local.email    = email;
-                newUser.local.password = newUser.generateHash(password);
+
 
                 // save the user
                 newUser.save(function(err) {

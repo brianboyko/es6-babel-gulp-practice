@@ -41,8 +41,7 @@
     "should": "^8.2.2"
   },
   "devDependencies": {},
-
-    "scripts": {
+  "scripts": {
     "start": "nodemon server.js --ignore node_modules/"
   }
 }
