@@ -7,7 +7,8 @@ exports.up = function(knex, Promise) {
         knex.schema.createTable('users', function(table) {
             table.increments('id').primary();
             table.string('type');
-            table.string('local_login_email');
+            table.string('username');
+            table.string('email');
             table.string('local_password_hash');
             table.string('facebook_id');
             table.string('facebook_token');
@@ -19,7 +20,7 @@ exports.up = function(knex, Promise) {
             table.string('google_email');
             table.string('google_name');
             table.string('first_name');
-            table.string('lastname');
+            table.string('last_name');
             table.json('metadata_json');
             table.timestamp('created_on').defaultTo(knex.fn.now());
             table.timestamp('last_login').defaultTo(knex.fn.now());
