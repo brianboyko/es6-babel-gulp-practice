@@ -9,13 +9,13 @@ var configAuth = require('./auth');
 // Users.findOne({ field : criterion }) => returns the first record that matches the criterion.
 
 module.exports = function(passport, db) { // db is our database connection. 
-
   // need to require Users inside this function so we can pass the db connection
-  var Users = require('../app/models/User.js')(db);
+  var Users = require('../app/models/Users.js')(db);
 
   // used to serialize the user for the session
   // adds user.id to all requests from now until logout
   passport.serializeUser(function(user, done) {
+    console.log("passport.serializeUser")
     done(null, user.id);
   });
 
@@ -36,6 +36,7 @@ module.exports = function(passport, db) { // db is our database connection.
       passReqToCallback: true // allows us to pass back the entire request to the callback
     },
     function(req, username, password, done) {
+      console.log("passport.js local-signup")
       process.nextTick(function() {
 
         // find a user whose username is the same as the forms username
@@ -48,11 +49,12 @@ module.exports = function(passport, db) { // db is our database connection.
                 'That username is already taken.'));
             }
             // if there is no user with that username create the user
-            var newUser = {};
-            newUser.username = username;
-            newUser.password = bcrypt.hashSync(password, 10);
+            var newUser = {
+              'username': username,
+              'hashpass': bcrypt.hashSync(password, 10)
+            }
 
-            Users.signupLocal(newUser.username, null, newUser.password)
+            Users.signupLocal(newUser.username, null, newUser.hashpass)
               .then(function(user) {
                 newUser.id = user[0];
                 return done(null, newUser);
@@ -73,6 +75,7 @@ module.exports = function(passport, db) { // db is our database connection.
       passReqToCallback: true // allows us to pass back the entire request to the callback
     },
     function(req, username, password, done) { // callback with username and password from our form
+      console.log("passport.js local-signup")
 
       // find a user whose username is the same as the forms username
       // we are checking to see if the user trying to login already exists

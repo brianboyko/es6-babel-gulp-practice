@@ -11,14 +11,15 @@ var bodyParser   = require('body-parser');
 var logger       = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
-var db           = require('./config/db.js')
+var pg           = require('pg')
+var db           = require('./config/db.js').knex
   // db.knex is our database connection. 
 
 // ======================
 // CONFIGURATION
 // ======================
 const PORT = process.env.PORT || 8080;
-require('./config/passport')(passport); 
+require('./config/passport')(passport, db); 
 
 // DATABASE =============
   
