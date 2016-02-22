@@ -15,8 +15,7 @@ module.exports = function(passport, db) { // db is our database connection.
   // used to serialize the user for the session
   // adds user.id to all requests from now until logout
   passport.serializeUser(function(user, done) {
-    console.log("passport.serializeUser")
-    done(null, user.id);
+    done(null, user);
   });
 
   // used to deserialize the user
@@ -36,7 +35,6 @@ module.exports = function(passport, db) { // db is our database connection.
       passReqToCallback: true // allows us to pass back the entire request to the callback
     },
     function(req, username, password, done) {
-      console.log("passport.js local-signup")
       process.nextTick(function() {
 
         // find a user whose username is the same as the forms username
@@ -54,9 +52,10 @@ module.exports = function(passport, db) { // db is our database connection.
               'hashpass': bcrypt.hashSync(password, 10)
             }
 
-            Users.signupLocal(newUser.username, null, newUser.hashpass)
+            Users.signupLocal(newUser.username, newUser.hashpass)
               .then(function(user) {
-                newUser.id = user[0];
+                console.log("user after signup local", user)
+                newUser.id = user[0]; // STUCK HERE.  THIS SHOULD BE THE ID FROM THE DB. BUT IT'S NOT. POSTGRESQL IS RETURNING SOMETHING DIFFERENT. 
                 return done(null, newUser);
               });
 
@@ -75,7 +74,6 @@ module.exports = function(passport, db) { // db is our database connection.
       passReqToCallback: true // allows us to pass back the entire request to the callback
     },
     function(req, username, password, done) { // callback with username and password from our form
-      console.log("passport.js local-signup")
 
       // find a user whose username is the same as the forms username
       // we are checking to see if the user trying to login already exists
