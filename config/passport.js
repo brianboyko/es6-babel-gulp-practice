@@ -1,5 +1,5 @@
 var LocalStrategy = require('passport-local').Strategy;
-var FacebookStrategy = require('p;assport-facebook').Strategy;
+var FacebookStrategy = require('passport-facebook').Strategy;
 var bcrypt = require('bcrypt')
 var configAuth = require('./auth');
 
@@ -11,7 +11,7 @@ var configAuth = require('./auth');
 module.exports = function(passport, db) { // db is our database connection. 
 
   // need to require Users inside this function so we can pass the db connection
-  var Users = require('../models/User.js')(db);
+  var Users = require('../app/models/User.js')(db);
 
   // used to serialize the user for the session
   // adds user.id to all requests from now until logout
@@ -96,63 +96,63 @@ module.exports = function(passport, db) { // db is our database connection.
         });
     }));
 
-  // This is the facebook login stuff.
-  passport.use(new FacebookStrategy({
+  // // This is the facebook login stuff.
+  // passport.use(new FacebookStrategy({
 
-      // pull in our app id and secret from our auth.js file
-      clientID: configAuth.facebookAuth.clientID,
-      clientSecret: configAuth.facebookAuth.clientSecret,
-      callbackURL: configAuth.facebookAuth.callbackURL,
-      profileFields: ["emails", "displayName", "name", "hometown",
-        "location", "gender" ],
-      passReqToCallback: true
-    },
+  //     // pull in our app id and secret from our auth.js file
+  //     clientID: configAuth.facebookAuth.clientID,
+  //     clientSecret: configAuth.facebookAuth.clientSecret,
+  //     callbackURL: configAuth.facebookAuth.callbackURL,
+  //     profileFields: ["emails", "displayName", "name", "hometown",
+  //       "location", "gender" ],
+  //     passReqToCallback: true
+  //   },
 
-    // facebook will send back the token and profile
-    function(req, accessToken, refreshToken, profile, done) {
-      // asynchronous
-      process.nextTick(function() {
+  //   // facebook will send back the token and profile
+  //   function(req, accessToken, refreshToken, profile, done) {
+  //     // asynchronous
+  //     process.nextTick(function() {
 
-        //user is not logged in yet
-        if (!req.user) {
+  //       //user is not logged in yet
+  //       if (!req.user) {
 
-          Users.findWhere({'facebook_id':profile.id})
-            .then(
-              function(user) {
-                // if the user is found, then log them in
-                if (user.length) {
-                  return done(null, user[0]); // user found, return that user
-                } else {
-                  // if there is no user found with that facebook id, create them
-                  var newUser = {
-                    'facebook_id': profile.id,
-                    'facebook_token': accessToken,
-                    'facebook_username': profile.displayName
-                  };
+  //         Users.findWhere({'facebook_id':profile.id})
+  //           .then(
+  //             function(user) {
+  //               // if the user is found, then log them in
+  //               if (user.length) {
+  //                 return done(null, user[0]); // user found, return that user
+  //               } else {
+  //                 // if there is no user found with that facebook id, create them
+  //                 var newUser = {
+  //                   'facebook_id': profile.id,
+  //                   'facebook_token': accessToken,
+  //                   'facebook_username': profile.displayName
+  //                 };
 
-                  // save our user to the database
-                  Users.signupFacebook(profile.displayName, profile.id, accessToken)
-                    .then(function(userRow) {
-                      newUser.id = userRow[0];
-                      return done(null, newUser);
-                    });
-                }
-              })
-            .catch(function(err) {
-              return done(err);
-            });
-          //user is logged in and needs to be merged
-        } else {
-          // This is actually broken. There was supposed to be a
-          // "connect to facebook" button on the dashboard for already
-          // locally signed-up users.
-          var user = req.user;
+  //                 // save our user to the database
+  //                 Users.signupFacebook(profile.displayName, profile.id, accessToken)
+  //                   .then(function(userRow) {
+  //                     newUser.id = userRow[0];
+  //                     return done(null, newUser);
+  //                   });
+  //               }
+  //             })
+  //           .catch(function(err) {
+  //             return done(err);
+  //           });
+  //         //user is logged in and needs to be merged
+  //       } else {
+  //         // This is actually broken. There was supposed to be a
+  //         // "connect to facebook" button on the dashboard for already
+  //         // locally signed-up users.
+  //         var user = req.user;
 
-          user.fb_id = profile.id;
-          user.fb_token = accessToken;
+  //         user.fb_id = profile.id;
+  //         user.fb_token = accessToken;
 
-          Users.updateFacebook(profile.id, accessToken, user.id);
-        }
-      });
-    }));
+  //         Users.updateFacebook(profile.id, accessToken, user.id);
+  //       }
+  //     });
+  //   }));
 }
