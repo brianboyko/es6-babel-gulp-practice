@@ -48,6 +48,7 @@ module.exports = function(app, passport) {
        return next(err);
       }
       if (!user) {
+        console.log("req:\n", req.body)
         return res.redirect('/nouser');
       }
       req.login(user, function(err){
