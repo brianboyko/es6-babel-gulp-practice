@@ -22,9 +22,9 @@ module.exports = function(passport, db) { // db is our database connection.
   // Checks to see what your user ID is on each page
   // and makes sure that gets the entire row
   passport.deserializeUser(function(id, done) {
-    Users.findOne({ 'id': id })
+    Users.findWhere({ 'id': id })
       .then(function(user) {
-        done(null, user);
+        done(null, user[0]);
       });
   });
 
@@ -74,18 +74,19 @@ module.exports = function(passport, db) { // db is our database connection.
       passReqToCallback: true // allows us to pass back the entire request to the callback
     },
     function(req, username, password, done) { // callback with username and password from our form
-
+      console.log("username getting to local-login?"); 
       // find a user whose username is the same as the forms username
       // we are checking to see if the user trying to login already exists
       Users.findWhere({'username': username})
         .then(
           function(user) {
+            console.log('user', user)
             // if no user is found, return the message
             if (!user.length)
               return done(null, false, req.flash('loginMessage',
                 'No user found.')); // req.flash is the way to set flashdata using connect-flash
             // if the user is found but the password is wrong
-            if (!bcrypt.compareSync(password, user[0].password))
+            if (!bcrypt.compareSync(password, user[0].hashpass))
               return done(null, false, req.flash('loginMessage',
                 'Oops! Wrong password.')); // create the loginMessage and save it to session as flashdata
 
