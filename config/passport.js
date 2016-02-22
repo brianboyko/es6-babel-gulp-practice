@@ -15,7 +15,7 @@ module.exports = function(passport, db) { // db is our database connection.
   // used to serialize the user for the session
   // adds user.id to all requests from now until logout
   passport.serializeUser(function(user, done) {
-    done(null, user);
+    done(null, user.id);
   });
 
   // used to deserialize the user
