@@ -15,9 +15,10 @@ var isLoggedIn = function(req, res, next) {
 module.exports = function(app, passport) {
 
   // HOME PAGE (with login links) ========
-  app.get('/', function(req, res) {
-      res.render('index.ejs'); // load the index.ejs file
-  });
+  // app.get('/', function(req, res) {
+  //     res.render('index.ejs'); // load the index.ejs file
+  // });
+
 
   // LOGIN ===============================
   // show the login form
