@@ -8,8 +8,6 @@ process.env.NODE_ENV = 'development' // 'production'
 import React from 'react'
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
-import { browserHistory } from 'react-router'
-import { syncHistoryWithStore } from 'react-router-redux'
 
 // containers
 import App from './containers/App'
@@ -18,7 +16,6 @@ import App from './containers/App'
 import configureStore from './store/configureStore'
 
 const store = configureStore({})
-const history = syncHistoryWithStore(browserHistory, store)
 const rootElement = document.getElementById('root')
 
 render(

@@ -1,5 +1,9 @@
+// use es6
 require("babel-polyfill");
+// set environment
+process.env.NODE_ENV = 'development' // 'production'
 
+// requirements
 var webpack      = require('webpack')
   var webpackDevMiddleware = require('webpack-dev-middleware')
   var webpackHotMiddleware = require('webpack-hot-middleware')
@@ -16,16 +20,16 @@ var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
 var pg           = require('pg')
 var db           = require('./config/db.js').knex
-  // db.knex is our database connection. 
+  // db.knex is our database connection.
 
 // ======================
 // CONFIGURATION
 // ======================
 const PORT = process.env.PORT || 8080;
-require('./config/passport')(passport, db); 
+require('./config/passport')(passport, db);
 
 // DATABASE =============
-  
+
 
 // EXPRESS ==============
 
@@ -33,9 +37,11 @@ app.use(logger('dev'));
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.set('view engine', 'ejs'); // not sure I want to use ejs, but will keep it for now.
+// app.set('view engine', 'ejs'); // not sure I want to use ejs, but will keep it for now.
 
-  app.use(express.static(path.join(__dirname, 'views')))
+
+// FRONT PAGE
+  app.use(express.static(path.join(__dirname, 'client')))
 
 
 // PASSPORT ============
@@ -43,7 +49,7 @@ app.set('view engine', 'ejs'); // not sure I want to use ejs, but will keep it f
 app.use(session({secret: 'thisisthepassportseeeeeeeekrit' }));// any string of text will do.
 app.use(passport.initialize());
 app.use(passport.session()); // persisitent login sessions.
-app.use(flash()); // use connect-flash for flash messages stored in session. 
+app.use(flash()); // use connect-flash for flash messages stored in session.
 
 // WEBPACK =============
 var compiler = webpack(config)
@@ -67,3 +73,28 @@ app.listen(PORT, function(error) {
   }
 })
 
+// // REACT & REDUX ROOT.
+//
+// // requirements
+// import React from 'react'
+// import { render } from 'react-dom'
+// import { Provider } from 'react-redux'
+// import { browserHistory } from 'react-router'
+// import { syncHistoryWithStore } from 'react-router-redux'
+//
+// // containers
+// import App from './containers/App'
+//
+// // store
+// import configureStore from './store/configureStore'
+//
+// const store = configureStore({})
+// const history = syncHistoryWithStore(browserHistory, store)
+// const rootElement = document.getElementById('root')
+//
+// render(
+//   <Provider store={store}>
+//     <App />
+//   </Provider>,
+//   rootElement
+// )
