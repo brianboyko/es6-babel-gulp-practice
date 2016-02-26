@@ -11,7 +11,6 @@ var Users = function(db){
   return {
     signupLocal: function(username, hashpass) {
       var created_on = new Date();
-      console.log("Creating new user: ", username)
       return db('users').insert({
         'username': username,
         'hashpass': hashpass,
@@ -93,15 +92,11 @@ var Users = function(db){
 
 // can this be done via async/await?
     findWhere: function(keypair){  // for example: {'username':'bob'}
-            console.log("UserModel: findWhere", JSON.stringify(keypair))
-
       return db('users')
         .where(keypair)
         .select()
     },
     findOne: function(keypair){  // for example: {'username':'bob'}
-            console.log("UserModel: findOne", JSON.stringify(keypair))
-
       return db('users')
         .where(keypair)
         .select()

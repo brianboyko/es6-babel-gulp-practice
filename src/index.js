@@ -10,10 +10,10 @@ import { render } from 'react-dom'
 import { Provider } from 'react-redux'
 
 // containers
-import App from './containers/App'
+import App from '../containers/App'
 
 // store
-import configureStore from './store/configureStore'
+import configureStore from '../store/configureStore'
 
 const store = configureStore({})
 const rootElement = document.getElementById('root')
